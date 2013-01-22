@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,11 +45,23 @@ public class HighScore implements Comparable<HighScore> {
         writer.close();
     }
     
-    static HighScore askName(int score) {
+    public static HighScore askName(int score) {
         // FIXME: Read prompt from localization file?
         String name = JOptionPane.showInputDialog("Vul je naam in:");
         if (name == null) return null;
         return new HighScore(name, score);
+    }
+    
+    public static String defaultFilenameForGame(Game game) {
+        String homeDirectory = System.getProperty("user.home");
+        String filename = null;
+        switch (game) {
+            case SANDBAG_GAME: filename = ".fc2015-high-scores-sandbag"; break;
+            case CONTROL_ROOM_GAME: filename = ".fc2015-high-scores-control-room"; break;
+            case HELICOPTER_GAME: filename = ".fc2015-high-scores-helicopter"; break;
+            case SKYSCRAPER_GAME: filename = ".fc2015-high-scores-skyscraper"; break;
+        }
+        return new File(homeDirectory, filename).getAbsolutePath();
     }
     
     public int compareTo(HighScore other) {

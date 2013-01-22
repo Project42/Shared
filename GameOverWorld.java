@@ -6,6 +6,7 @@ public class GameOverWorld extends World {
     
     public GameOverWorld() {
         super(600, 400, 1);
+        game = Game.SANDBAG_GAME;
     }
     
     public GameOverWorld(Game game) {
