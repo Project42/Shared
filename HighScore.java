@@ -6,6 +6,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class HighScore implements Comparable<HighScore> {
     private String name;
@@ -41,6 +42,13 @@ public class HighScore implements Comparable<HighScore> {
         Writer writer = new FileWriter(filename, true);
         writer.write(getName() + ": " + getScore() + "\n");
         writer.close();
+    }
+    
+    static HighScore askName(int score) {
+        // FIXME: Read prompt from localization file?
+        String name = JOptionPane.showInputDialog("Vul je naam in:");
+        if (name == null) return null;
+        return new HighScore(name, score);
     }
     
     public int compareTo(HighScore other) {
